@@ -4,10 +4,10 @@
 \alias{get_bib_path}
 \title{Path to .bib file}
 \usage{
-get_bib_path(name)
+get_bib_path(name = NULL)
 }
 \arguments{
-\item{name}{the .bib file name}
+\item{name}{the .bib file name; if null returns a list of options}
 }
 \value{
 an absolute path to the .bib file
