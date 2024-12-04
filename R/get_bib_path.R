@@ -5,7 +5,14 @@
 #'
 get_bib_path <- function(name=NULL) {
 
-  dir <- system.file("extdata", package="BibTexLibraries")
+  cfig_path <- system.file("config.yml", package="BibTexLibraries")
+  config <- yaml::read_yaml(cfig_path)
+  dir <- config[['base_dir']]
+
+  # try elsewhere
+  if(is.null(dir) || !dir.exists(dir)) {
+    dir <- system.file("extdata", package="BibTexLibraries")
+  }
 
   if(is.null(name)) {
     files <- list.files(dir, full.names=FALSE)

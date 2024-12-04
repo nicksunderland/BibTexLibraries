@@ -5,7 +5,14 @@
 #'
 get_bib_format <- function(name=NULL) {
 
-  dir <- system.file("extdata", "csl_formats", package="BibTexLibraries")
+  cfig_path <- system.file("config.yml", package="BibTexLibraries")
+  config <- yaml::read_yaml(cfig_path)
+  dir <- file.path(config[['base_dir']], "csl_formats")
+
+  # try elsewhere
+  if(is.null(dir) || !dir.exists(dir)) {
+    dir <- system.file("extdata", "csl_formats", package="BibTexLibraries")
+  }
 
   if(is.null(name)) {
     message("Csl (`name`) options: \n\t", paste0(list.files(dir, full.names=FALSE), collapse="\n\t"))
